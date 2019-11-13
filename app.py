@@ -24,11 +24,28 @@ def index():
 
 @app.route('/clientes', methods=['GET'])
 def clientes():
-    tabla=ListaCSV()
-    cantcli=len(tabla)-1
-    cabeza=tabla[0]
-    del tabla [0]     
-    return render_template('clientes.html', cantidad=cantcli, listacli=tabla, encabezado=cabeza) 
+    if 'username' in session:
+        tabla=ListaCSV()
+        cantcli=len(tabla)-1
+        cabeza=tabla[0]
+        del tabla [0]     
+        return render_template('clientes.html', cantidad=cantcli, listacli=tabla, encabezado=cabeza) 
+    else:
+        formulario = LoginForm()
+        if formulario.validate_on_submit():
+            with open('usuarios') as archivo:
+                archivo_csv = csv.reader(archivo)
+                registro = next(archivo_csv)
+                while registro:
+                    if formulario.usuario.data == registro[0] and formulario.password.data == registro[1]:
+                        flash('Bienvenido')
+                        session['username'] = formulario.usuario.data
+                        return render_template('ingresado.html')
+                    registro = next(archivo_csv, None)
+                else:
+                    flash('Revisá nombre de usuario y contraseña')
+                    return redirect(url_for('ingresar'))
+        return render_template('login.html', formulario=formulario)
 
 
 @app.errorhandler(404)
