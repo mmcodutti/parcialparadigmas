@@ -15,6 +15,11 @@ def ListaCSV():
         leearch = csv.reader(archivoclientes)
         archlist= list(leearch)
     return archlist
+def encabezado(tabla):
+    return tabla[0]
+def cuerpo(tabla):
+    del tabla[0]
+    return tabla        
 
 @app.route('/')
 def index():
@@ -27,9 +32,9 @@ def clientes():
     if 'username' in session:
         tabla=ListaCSV()
         cantcli=len(tabla)-1
-        cabeza=tabla[0]
-        del tabla [0]     
-        return render_template('clientes.html', cantidad=cantcli, listacli=tabla, encabezado=cabeza) 
+        cabeza=encabezado(tabla)
+        cli=cuerpo(tabla)    
+        return render_template('clientes.html', cantidad=cantcli, listacli=cli, encabezado=cabeza) 
     else:
         formulario = LoginForm()
         if formulario.validate_on_submit():
