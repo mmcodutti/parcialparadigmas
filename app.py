@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = 'aca va cualquier cosa que sirva para hashear'
 
 #carga en una lista el archivo de clientes y lo devuelve
 def ListaCSV():
-    with open('clientes.csv', 'r') as archivoclientes:
+    with open('clientes.csv', 'r', encoding="UTF-8") as archivoclientes:
         leearch = csv.reader(archivoclientes)
         archlist= list(leearch)
     return archlist
@@ -52,7 +52,7 @@ def clientes():
                     return redirect(url_for('ingresar'))
         return render_template('login.html', formulario=formulario)
 
-
+        
 @app.errorhandler(404)
 def no_encontrado(e):
     return render_template('404.html'), 404
@@ -80,6 +80,11 @@ def ingresar():
                 flash('Revisá nombre de usuario y contraseña')
                 return redirect(url_for('ingresar'))
     return render_template('login.html', formulario=formulario)
+
+
+@app.route('/altacliente', methods=['GET', 'POST'])
+def altacliente():
+    return render_template('altaclientes.html', form=formulario)    
 
 
 @app.route('/registrar', methods=['GET', 'POST'])

@@ -27,16 +27,18 @@
                 {% if 'username' in session %}
                 <li><a href="/clientes">Clientes</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Dropdown
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="menubar" data-toggle="dropdown" aria-expanded="false">
+                    Consultar
+                    <span class="caret"></span>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </li>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li class="dropdown-header" href="#">Filtrar por</li>
+                      <li class="divider"></li>
+                      <li><a class="dropdown-item" href="/filt-pais">País</a></li>
+                      <li><a class="dropdown-item" href="/filt-edad">Edad</a></li>
+                      <li><a class="dropdown-item" href="/filt-fecha">Fecha de alta</a></li>
+                    </ul>
+                </li>
                              <li><a href="/logout">Salir</a></li>
                 {% else %}
                 <li><a href="/ingresar">Ingresar</a></li>
