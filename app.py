@@ -27,7 +27,7 @@ def index():
 
 
 
-@app.route('/clientes', methods=['GET'])
+@app.route('/clientes', methods=['GET', 'POST'])
 def clientes():
     if 'username' in session:
         tabla=ListaCSV()
