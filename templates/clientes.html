@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Clientes {{ cantidad }} {{ listacli }} {{ encabezado }} {% endblock %}
+{% block title %}Clientes {% endblock %}
 
 {% block page_content %}
 <div class="page-header">
-    <h2>La empresa tiene: {{ cantidad }} clientes </h2p>
-    <a class="btn btn-primary" href="/altaclientes" role="button">Alta nuevo cliente</a>
+    <h2>{{ cantidad }} clientes {{totfil}} </h2p>
+    <a class="btn btn-primary" href="/altacliente" role="button">Alta nuevo cliente</a>
 </div>
 
 <div> 
